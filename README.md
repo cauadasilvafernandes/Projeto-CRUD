@@ -1,4 +1,3 @@
-
 # 💰 Sistema de Controle de Gastos - Página de Login
 
 Este projeto faz parte de um sistema de controle de gastos, que está sendo desenvolvido com o objetivo de organizar melhor as finanças pessoais ou familiares. Ele será acessado por meio de uma tela de login, garantindo que cada usuário tenha acesso apenas aos seus dados.
@@ -65,7 +64,6 @@ Aprender desenvolvimento web na prática enquanto crio uma ferramenta útil para
 
 - Nome: **Cauã**
 - Curso: *Análise e Desenvolvimento de Sistemas*
-- Local: Santana do Riacho - MG
 
 
 
