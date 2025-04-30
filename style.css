@@ -17,7 +17,7 @@ body {
 }
 
 /* Caixa principal com efeito 3D */
-.login-box {
+.caixa-login {
   background-color: #e0e0e0;
   padding: 60px;
   border-radius: 12px;
@@ -33,39 +33,39 @@ h2 {
 }
 
 /* Inputs */
-.input-box {
+.caixa-entrada {
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
 }
 
-.input-box label {
+.caixa-entrada label {
   margin-bottom: 5px;
   font-weight: bold;
   color: #555;
 }
 
-.input-box input {
+.caixa-entrada input {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 6px;
   transition: border 0.3s;
 }
 
-.input-box input:focus {
+.caixa-entrada input:focus {
   border-color: #1abc9c;
   outline: none;
 }
 
 /* Botões */
-.button-box {
+.caixa-botoes {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
 }
 
-.button-box button {
+.caixa-botoes button {
   padding: 8px 20px;
   border: none;
   border-radius: 8px;
@@ -78,18 +78,18 @@ h2 {
   transition: all 0.3s ease;
 }
 
-.button-box button:hover {
+.caixa-botoes button:hover {
   background-color: #16a085;
   transform: scale(1.03);
 }
 
-.error-message {
+.mensagem-erro {
   color: red;
   font-size: 12px;
   margin-top: 4px;
 }
 
-.success-message {
+.mensagem-sucesso {
   color: green;
   font-size: 12px;
   margin-top: 4px;
