@@ -82,3 +82,15 @@ h2 {
   background-color: #16a085;
   transform: scale(1.03);
 }
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.success-message {
+  color: green;
+  font-size: 12px;
+  margin-top: 4px;
+}
