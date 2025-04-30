@@ -5,18 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Login de Controle</title>
   <link rel="stylesheet" href="style.css" />
-  <style>
-    .error-message {
-      color: red;
-      font-size: 12px;
-      margin-top: 4px;
-    }
-    .success-message {
-      color: green;
-      font-size: 12px;
-      margin-top: 4px;
-    }
-  </style>
 </head>
 <body>
 
@@ -48,7 +36,7 @@
   </div>
 
   <script>
-    // Função que valida email
+    // Valida email
     function validateEmail(email) {
       let usuario = email.substring(0, email.indexOf("@"));
       let dominio = email.substring(email.indexOf("@") + 1, email.length);
@@ -65,24 +53,24 @@
         dominio.lastIndexOf(".") < dominio.length - 1
       );
     }
-    
-    // Função que valida senha (mínimo 6 caracteres)
+
+    // Valida senha
     function validatePassword(password) {
       return password.length >= 6;
     }
-    
-    // Função que valida os dois campos juntos enquanto digita
+
+    // Valida os dois campos em tempo real
     function validateFields() {
       const emailField = document.getElementById("email");
       const senhaField = document.getElementById("senha");
       const emailFeedback = document.getElementById("emailFeedback");
       const senhaFeedback = document.getElementById("senhaFeedback");
       const loginButton = document.getElementById("login-button");
-    
+
       let emailValido = validateEmail(emailField.value);
       let senhaValida = validatePassword(senhaField.value);
-    
-      // Feedback para o email
+
+      // Email
       if (emailField.value.length > 0) {
         if (emailValido) {
           emailFeedback.className = "success-message";
@@ -94,8 +82,8 @@
       } else {
         emailFeedback.innerText = "";
       }
-    
-      // Feedback para a senha
+
+      // Senha
       if (senhaField.value.length > 0) {
         if (senhaValida) {
           senhaFeedback.className = "success-message";
@@ -107,48 +95,46 @@
       } else {
         senhaFeedback.innerText = "";
       }
-    
-      // Habilitar ou desabilitar o botão
+
+      // Ativa ou desativa o botão
       loginButton.disabled = !(emailValido && senhaValida);
     }
-    
-    // Função que valida quando clicar no botão "Entrar"
+
+    // Valida ao clicar em "Entrar"
     function validateForm(event) {
-      event.preventDefault(); // Impede o envio do formulário
-    
+      event.preventDefault();
+
       const email = document.getElementById('email').value.trim();
       const senha = document.getElementById('senha').value.trim();
-    
+
       if (email === "" || senha === "") {
         alert("Por favor, preencha todos os campos.");
         return false;
       }
-    
+
       if (!validateEmail(email)) {
         alert('Por favor, insira um email válido.');
         return false;
       }
-    
+
       if (!validatePassword(senha)) {
         alert("Por favor, insira uma senha válida (mínimo 6 caracteres).");
         return false;
       }
-    
-      alert("Login bem-sucedido!");
+
+      // Tudo certo, redireciona para home.html
+      window.location.href = "home.html";
       return true;
     }
-    
-    // Funções para os outros botões
+
+    // Redirecionamentos
     function redirectToRegister() {
       alert("Você clicou em Registrar (coloque o redirecionamento aqui)");
     }
-    
+
     function redirectToRecoverPassword() {
       alert("Você clicou em Recuperar senha (coloque o redirecionamento aqui)");
     }
-    </script>    
-  
-    
-
+  </script>
 </body>
 </html>
