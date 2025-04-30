@@ -5,140 +5,128 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Login de Controle</title>
   <link rel="stylesheet" href="style.css" />
-  
 </head>
 <body>
 
-  <div class="login-box">
+  <div class="caixa-login">
     <h2>Login de Controle</h2>
-    <form id="emailForm" onsubmit="return validateForm(event)">
+    <form id="formulario-email" onsubmit="return validarFormulario(event)">
       
       <!-- Email -->
-      <div class="input-box">
+      <div class="caixa-entrada">
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" placeholder="seu@email.com" onchange="validateFields()" onkeyup="validateFields()" required>
-        <small id="emailFeedback" class="error-message"></small>
+        <input type="email" id="email" name="email" placeholder="seu@email.com" onchange="validarCampos()" onkeyup="validarCampos()" required>
+        <small id="retorno-email" class="mensagem-erro"></small>
       </div>
 
       <!-- Senha -->
-      <div class="input-box">
+      <div class="caixa-entrada">
         <label for="senha">Senha:</label>
-        <input type="password" id="senha" name="senha" placeholder="Sua senha" onchange="validateFields()" onkeyup="validateFields()" required>
-        <small id="senhaFeedback" class="error-message"></small>
+        <input type="password" id="senha" name="senha" placeholder="Sua senha" onchange="validarCampos()" onkeyup="validarCampos()" required>
+        <small id="retorno-senha" class="mensagem-erro"></small>
       </div>
 
       <!-- Botões -->
-      <div class="button-box">
-        <button type="submit" id="login-button" disabled>Entrar</button>
-
-        <button type="button" id="register-button" onclick="redirectToRegister()">Registrar</button>
-        <button type="button" id="recover-password-button" onclick="redirectToRecoverPassword()">Recuperar senha</button>
+      <div class="caixa-botoes">
+        <button type="submit" id="botao-entrar" disabled>Entrar</button>
+        <button type="button" id="botao-registrar" onclick="redirecionarParaRegistro()">Registrar</button>
+        <button type="button" id="botao-recuperar-senha" onclick="redirecionarParaRecuperarSenha()">Recuperar senha</button>
       </div>
     </form>
   </div>
 
   <script>
-   // Valida email
-function validateEmail(email) {
-  let usuario = email.substring(0, email.indexOf("@"));
-  let dominio = email.substring(email.indexOf("@") + 1, email.length);
+    function validarEmail(email) {
+      let usuario = email.substring(0, email.indexOf("@"));
+      let dominio = email.substring(email.indexOf("@") + 1);
 
-  return (
-    usuario.length >= 1 &&
-    dominio.length >= 3 &&
-    usuario.search("@") === -1 &&
-    dominio.search("@") === -1 &&
-    usuario.search(" ") === -1 &&
-    dominio.search(" ") === -1 &&
-    dominio.search(".") !== -1 &&
-    dominio.indexOf(".") >= 1 &&
-    dominio.lastIndexOf(".") < dominio.length - 1
-  );
-}
-
-// Valida senha
-function validatePassword(password) {
-  return password.length >= 6;
-}
-
-// Valida os dois campos em tempo real
-function validateFields() {
-  const emailField = document.getElementById("email");
-  const senhaField = document.getElementById("senha");
-  const emailFeedback = document.getElementById("emailFeedback");
-  const senhaFeedback = document.getElementById("senhaFeedback");
-  const loginButton = document.getElementById("login-button");
-
-  let emailValido = validateEmail(emailField.value);
-  let senhaValida = validatePassword(senhaField.value);
-
-  // Email
-  if (emailField.value.length > 0) {
-    if (emailValido) {
-      emailFeedback.className = "success-message";
-      emailFeedback.innerText = "E-mail válido";
-    } else {
-      emailFeedback.className = "error-message";
-      emailFeedback.innerText = "E-mail inválido";
+      return (
+        usuario.length >= 1 &&
+        dominio.length >= 3 &&
+        usuario.search("@") === -1 &&
+        dominio.search("@") === -1 &&
+        usuario.search(" ") === -1 &&
+        dominio.search(" ") === -1 &&
+        dominio.search(".") !== -1 &&
+        dominio.indexOf(".") >= 1 &&
+        dominio.lastIndexOf(".") < dominio.length - 1
+      );
     }
-  } else {
-    emailFeedback.innerText = "";
-  }
 
-  // Senha
-  if (senhaField.value.length > 0) {
-    if (senhaValida) {
-      senhaFeedback.className = "success-message";
-      senhaFeedback.innerText = "Senha válida";
-    } else {
-      senhaFeedback.className = "error-message";
-      senhaFeedback.innerText = "Senha deve ter pelo menos 6 caracteres";
+    function validarSenha(senha) {
+      return senha.length >= 6;
     }
-  } else {
-    senhaFeedback.innerText = "";
-  }
 
-  // Ativa ou desativa o botão
-  loginButton.disabled = !(emailValido && senhaValida);
-}
+    function validarCampos() {
+      const campoEmail = document.getElementById("email");
+      const campoSenha = document.getElementById("senha");
+      const retornoEmail = document.getElementById("retorno-email");
+      const retornoSenha = document.getElementById("retorno-senha");
+      const botaoEntrar = document.getElementById("botao-entrar");
 
-// Valida ao clicar em "Entrar"
-function validateForm(event) {
-  event.preventDefault();
+      let emailValido = validarEmail(campoEmail.value);
+      let senhaValida = validarSenha(campoSenha.value);
 
-  const email = document.getElementById('email').value.trim();
-  const senha = document.getElementById('senha').value.trim();
+      if (campoEmail.value.length > 0) {
+        if (emailValido) {
+          retornoEmail.className = "mensagem-sucesso";
+          retornoEmail.innerText = "E-mail válido";
+        } else {
+          retornoEmail.className = "mensagem-erro";
+          retornoEmail.innerText = "E-mail inválido";
+        }
+      } else {
+        retornoEmail.innerText = "";
+      }
 
-  if (email === "" || senha === "") {
-    alert("Por favor, preencha todos os campos.");
-    return false;
-  }
+      if (campoSenha.value.length > 0) {
+        if (senhaValida) {
+          retornoSenha.className = "mensagem-sucesso";
+          retornoSenha.innerText = "Senha válida";
+        } else {
+          retornoSenha.className = "mensagem-erro";
+          retornoSenha.innerText = "Senha deve ter pelo menos 6 caracteres";
+        }
+      } else {
+        retornoSenha.innerText = "";
+      }
 
-  if (!validateEmail(email)) {
-    alert('Por favor, insira um email válido.');
-    return false;
-  }
+      botaoEntrar.disabled = !(emailValido && senhaValida);
+    }
 
-  if (!validatePassword(senha)) {
-    alert("Por favor, insira uma senha válida (mínimo 6 caracteres).");
-    return false;
-  }
+    function validarFormulario(evento) {
+      evento.preventDefault();
 
-  // Tudo certo, redireciona para home.html em nova aba
-  window.open('home.html', '_blank');
-  return true;
-}
+      const email = document.getElementById('email').value.trim();
+      const senha = document.getElementById('senha').value.trim();
 
-// Redirecionamentos
-function redirectToRegister() {
-  window.open('registro.html', '_blank');
-}
+      if (email === "" || senha === "") {
+        alert("Por favor, preencha todos os campos.");
+        return false;
+      }
 
-function redirectToRecoverPassword() {
-  window.open('recuperar-senha.html', '_blank');
-}
+      if (!validarEmail(email)) {
+        alert('Por favor, insira um email válido.');
+        return false;
+      }
 
+      if (!validarSenha(senha)) {
+        alert("Por favor, insira uma senha válida (mínimo 6 caracteres).");
+        return false;
+      }
 
+      window.open('home.html', '_blank');
+      return true;
+    }
+
+    function redirecionarParaRegistro() {
+      window.open('registro.html', '_blank');
+      window.location.href ='pages/register/registro.html';
+    }
+
+    function redirecionarParaRecuperarSenha() {
+      window.open('recuperar-senha.html', '_blank');
+    }
   </script>
 </body>
 </html>
